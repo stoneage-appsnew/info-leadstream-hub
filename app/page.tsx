@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { CheckCircle2, Shield, Phone, Users, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 
 export default function Home() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [reviews, setReviews] = useState<{ id: string; url: string }[]>([]);
+  const [customTimeActive, setCustomTimeActive] = useState(false);
   const [formData, setFormData] = useState({
     markets: [] as string[],
     agentType: "",
@@ -19,6 +21,10 @@ export default function Home() {
     email: "",
     phone: "",
     consent: false,
+    howSoon: "",
+    monthlyBudget: "",
+    contactMethod: "",
+    bestTime: "",
   });
 
   const markets = [
@@ -70,7 +76,7 @@ export default function Home() {
   };
 
   const handleNext = () => {
-    if (currentStep < 4) setCurrentStep(currentStep + 1);
+    if (currentStep < 5) setCurrentStep(currentStep + 1);
   };
 
   const handleBack = () => {
@@ -93,8 +99,8 @@ export default function Home() {
       const data = await response.json();
 
       if (data.success) {
-        setSuccess(true);
-        // Keep success message visible - don't reset
+        router.push("/thank-you");
+        return;
       } else {
         alert("Something went wrong. Please try again.");
       }
@@ -164,7 +170,7 @@ export default function Home() {
           <div className="bg-gradient-to-br from-[#1e2740] to-[#151d30] rounded-2xl p-4 sm:p-6 shadow-[0_0_50px_rgba(0,212,255,0.15)] border-2 border-[#00d4ff]/30 w-full max-w-full backdrop-blur-sm">
             {/* Progress Indicator */}
             <div className="flex justify-between mb-6">
-              {[1, 2, 3, 4].map((step) => (
+              {[1, 2, 3, 4, 5].map((step) => (
                 <div key={step} className="flex items-center flex-1">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-lg ${
@@ -175,7 +181,7 @@ export default function Home() {
                   >
                     {step}
                   </div>
-                  {step < 4 && (
+                  {step < 5 && (
                     <div
                       className={`flex-1 h-1.5 mx-2 rounded-full ${
                         currentStep > step
@@ -189,33 +195,8 @@ export default function Home() {
             </div>
 
             <form onSubmit={handleSubmit}>
-              {/* Success Message */}
-              {success && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center space-y-4 py-8"
-                >
-                  <div className="mx-auto w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center">
-                    <CheckCircle2 className="w-10 h-10 text-green-500" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-white">Thank You!</h2>
-                  <p className="text-gray-300 text-sm max-w-md mx-auto">
-                    Your information has been received. Our team will review
-                    your details and reach out to you within 24 hours to discuss
-                    exclusive lead opportunities tailored to your markets.
-                  </p>
-                  <div className="pt-4">
-                    <div className="inline-flex items-center space-x-2 text-[#00d4ff] text-sm">
-                      <Phone className="w-4 h-4" />
-                      <span>Expect a call from our team soon!</span>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
               {/* Step 1: Markets Served */}
-              {!success && currentStep === 1 && (
+              {currentStep === 1 && (
                 <div className="space-y-4">
                   <h2 className="text-xl font-bold text-center mb-4">
                     Markets Served
@@ -250,7 +231,7 @@ export default function Home() {
               )}
 
               {/* Step 2: Agent Type */}
-              {!success && currentStep === 2 && (
+              {currentStep === 2 && (
                 <div className="space-y-4">
                   <h2 className="text-xl font-bold text-center mb-4">
                     Agent Type
@@ -443,9 +424,182 @@ export default function Home() {
                 </div>
               )}
 
-              {/* Step 4: Consent */}
-              {!success && currentStep === 4 && (
-                <div className="space-y-4">
+              {/* Step 4: Lead Qualifications */}
+              {currentStep === 4 && (
+                <div className="space-y-4 text-left">
+                  <h2 className="text-xl font-bold text-center mb-4">
+                    Lead Preferences
+                  </h2>
+
+                  <div className="space-y-4">
+                    {/* How Soon */}
+                    <div>
+                      <label className="block text-xs font-semibold text-[#00d4ff] mb-2">
+                        How soon are you looking to start?
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {["Immediately", "Within 7 Days", "Within 30 Days", "Just Researching"].map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, howSoon: option })}
+                            className={`p-2.5 rounded-lg border text-xs font-medium transition-all text-center ${
+                              formData.howSoon === option
+                                ? "bg-[#00d4ff]/20 border-[#00d4ff] text-[#00d4ff]"
+                                : "bg-[#0a0f1a] border-gray-800 text-gray-300 hover:border-gray-700"
+                            }`}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Monthly Lead Budget */}
+                    <div>
+                      <label className="block text-xs font-semibold text-[#00d4ff] mb-2">
+                        What is your monthly lead budget?
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {["Under $500", "$500 - $1,500", "$1,500 - $5,000", "$5,000+"].map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, monthlyBudget: option })}
+                            className={`p-2.5 rounded-lg border text-xs font-medium transition-all text-center ${
+                              formData.monthlyBudget === option
+                                ? "bg-[#00d4ff]/20 border-[#00d4ff] text-[#00d4ff]"
+                                : "bg-[#0a0f1a] border-gray-800 text-gray-300 hover:border-gray-700"
+                            }`}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Preferred Contact Method */}
+                    <div>
+                      <label className="block text-xs font-semibold text-[#00d4ff] mb-2">
+                        Preferred Contact Method
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {["Call Me Now", "Text Me First", "Email Me Information", "Schedule a Call"].map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => {
+                              const updatedData = { ...formData, contactMethod: option };
+                              if (option !== "Schedule a Call") {
+                                updatedData.bestTime = "";
+                                setCustomTimeActive(false);
+                              }
+                              setFormData(updatedData);
+                            }}
+                            className={`p-2.5 rounded-lg border text-xs font-medium transition-all text-center ${
+                              formData.contactMethod === option
+                                ? "bg-[#00d4ff]/20 border-[#00d4ff] text-[#00d4ff]"
+                                : "bg-[#0a0f1a] border-gray-800 text-gray-300 hover:border-gray-700"
+                            }`}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Best Time to Reach (Conditional) */}
+                    {formData.contactMethod === "Schedule a Call" && (
+                      <div className="space-y-2 mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                        <label className="block text-xs font-semibold text-[#00d4ff] mb-2">
+                          Best Time to Reach You
+                        </label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {[
+                            "Morning (9 AM - 12 PM)",
+                            "Afternoon (12 PM - 5 PM)",
+                            "Evening (5 PM - 8 PM)",
+                          ].map((preset) => (
+                            <button
+                              key={preset}
+                              type="button"
+                              onClick={() => {
+                                setCustomTimeActive(false);
+                                setFormData({ ...formData, bestTime: preset });
+                              }}
+                              className={`p-2.5 rounded-lg border text-xs font-medium transition-all text-center ${
+                                !customTimeActive && formData.bestTime === preset
+                                  ? "bg-[#00d4ff]/20 border-[#00d4ff] text-[#00d4ff]"
+                                  : "bg-[#0a0f1a] border-gray-800 text-gray-300 hover:border-gray-700"
+                              }`}
+                            >
+                              {preset.split(" (")[0]}
+                              <span className="block text-[10px] text-gray-400 font-normal">
+                                {preset.includes("(") ? preset.substring(preset.indexOf("(")) : ""}
+                              </span>
+                            </button>
+                          ))}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setCustomTimeActive(true);
+                              setFormData({ ...formData, bestTime: "" });
+                            }}
+                            className={`p-2.5 rounded-lg border text-xs font-medium transition-all text-center ${
+                              customTimeActive
+                                ? "bg-[#00d4ff]/20 border-[#00d4ff] text-[#00d4ff]"
+                                : "bg-[#0a0f1a] border-gray-800 text-gray-300 hover:border-gray-700"
+                            }`}
+                          >
+                            Custom
+                            <span className="block text-[10px] text-gray-400 font-normal">
+                              Enter own time
+                            </span>
+                          </button>
+                        </div>
+
+                        {customTimeActive && (
+                          <input
+                            type="text"
+                            placeholder="e.g. Tomorrow 3 PM, weekends only"
+                            value={formData.bestTime}
+                            onChange={(e) => setFormData({ ...formData, bestTime: e.target.value })}
+                            className="w-full px-3 py-2 mt-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white placeholder-gray-500 animate-in fade-in slide-in-from-top-1 duration-200"
+                            required
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex gap-3 mt-6">
+                    <button
+                      type="button"
+                      onClick={handleBack}
+                      className="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold text-sm hover:bg-gray-600 transition-colors"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      disabled={
+                        !formData.howSoon ||
+                        !formData.monthlyBudget ||
+                        !formData.contactMethod ||
+                        (formData.contactMethod === "Schedule a Call" && !formData.bestTime)
+                      }
+                      className="flex-1 bg-[#00d4ff] text-[#0a0f1a] py-3 rounded-lg font-semibold text-sm hover:bg-[#00b8e6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 5: Consent */}
+              {currentStep === 5 && (
+                <div className="space-y-4 text-left">
                   <h2 className="text-xl font-bold text-center mb-4">
                     Review & Consent
                   </h2>
@@ -470,6 +624,15 @@ export default function Home() {
                       </p>
                       <p className="text-sm text-white">{formData.email}</p>
                       <p className="text-sm text-white">{formData.phone}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-400 mb-1">Preferences & Budget:</p>
+                      <p className="text-sm text-white">Start: {formData.howSoon}</p>
+                      <p className="text-sm text-white">Budget: {formData.monthlyBudget}</p>
+                      <p className="text-sm text-white">
+                        Contact: {formData.contactMethod}
+                        {formData.contactMethod === "Schedule a Call" && formData.bestTime && ` (${formData.bestTime})`}
+                      </p>
                     </div>
                   </div>
 

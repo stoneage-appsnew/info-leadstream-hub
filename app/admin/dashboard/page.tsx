@@ -14,6 +14,10 @@ interface Lead {
   phone: string;
   status: string;
   createdAt: string;
+  howSoon?: string | null;
+  monthlyBudget?: string | null;
+  contactMethod?: string | null;
+  bestTime?: string | null;
 }
 
 export default function AdminDashboard() {
@@ -206,11 +210,23 @@ export default function AdminDashboard() {
                 {leads.map((lead) => (
                   <tr key={lead.id} className="hover:bg-[#0a0f1a]">
                     <td className="px-4 py-3 text-sm">
-                      {lead.firstName} {lead.lastName}
+                      <div>{lead.firstName} {lead.lastName}</div>
+                      {(lead.howSoon || lead.monthlyBudget) && (
+                        <div className="text-xs text-gray-400 mt-1 flex flex-col gap-0.5">
+                          {lead.howSoon && <span>Timeline: {lead.howSoon}</span>}
+                          {lead.monthlyBudget && <span>Budget: {lead.monthlyBudget}</span>}
+                        </div>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-sm">
                       <div>{lead.email}</div>
                       <div className="text-gray-400">{lead.phone}</div>
+                      {lead.contactMethod && (
+                        <div className="text-xs text-[#00d4ff] mt-1">
+                          Pref: {lead.contactMethod}
+                          {lead.bestTime && ` (${lead.bestTime})`}
+                        </div>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-sm">
                       <div>{lead.agentType}</div>

@@ -9,6 +9,10 @@ export interface ILead {
   email: string;
   phone: string;
   consent: boolean;
+  howSoon?: string;
+  monthlyBudget?: string;
+  contactMethod?: string;
+  bestTime?: string;
   status: "new" | "contacted" | "qualified" | "closed" | "rejected";
   createdAt: Date;
   updatedAt: Date;
@@ -48,6 +52,22 @@ const LeadSchema = new Schema<ILead>(
       type: Boolean,
       required: true,
       default: false,
+    },
+    howSoon: {
+      type: String,
+      required: false,
+    },
+    monthlyBudget: {
+      type: String,
+      required: false,
+    },
+    contactMethod: {
+      type: String,
+      required: false,
+    },
+    bestTime: {
+      type: String,
+      required: false,
     },
     status: {
       type: String,
