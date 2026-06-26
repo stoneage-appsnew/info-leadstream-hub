@@ -27,6 +27,23 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Google Ads Tag */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18257958637"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'AW-18257958637');
+          `}
+        </Script>
+
+        {/* Meta Pixel */}
         <Script
           id="meta-pixel"
           strategy="afterInteractive"
