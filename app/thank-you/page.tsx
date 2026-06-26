@@ -1,11 +1,26 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2, Phone, ArrowLeft } from "lucide-react";
 import { motion } from "motion/react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export default function ThankYou() {
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "conversion", {
+        send_to: "AW-18257958637/3FznCNyP18YcE02tiJYE",
+      });
+    }
+  }, []);
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-[#ededed] overflow-x-hidden flex flex-col justify-between">
       {/* Logo */}
@@ -31,14 +46,17 @@ export default function ThankYou() {
             <div className="mx-auto w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center">
               <CheckCircle2 className="w-12 h-12 text-green-500 animate-pulse" />
             </div>
+
             <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
               Thank You!
             </h1>
+
             <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto">
-              Your information has been received. Our team will review
-              your details and reach out to you within 24 hours to discuss
-              exclusive lead opportunities tailored to your markets.
+              Your information has been received. Our team will review your
+              details and reach out to you within 24 hours to discuss exclusive
+              lead opportunities tailored to your markets.
             </p>
+
             <div className="pt-4 border-t border-gray-800">
               <div className="inline-flex items-center space-x-2 text-[#00d4ff] text-sm sm:text-base font-semibold">
                 <Phone className="w-5 h-5 animate-bounce" />
