@@ -21,6 +21,7 @@ export default function Home() {
     email: "",
     phone: "",
     consent: false,
+    marketingConsent: false,
     howSoon: "",
     monthlyBudget: "",
     contactMethod: "",
@@ -684,7 +685,7 @@ export default function Home() {
     <div className="bg-[#0a0f1a] border border-[#00d4ff]/30 rounded-lg p-4">
 
       <p className="text-sm font-semibold text-white mb-4">
-        LeadStream Hub LLC SMS Consent
+        SMS Consent & Authorization
       </p>
 
       {/* Required Consent */}
@@ -752,7 +753,14 @@ export default function Home() {
       <label className="flex items-start space-x-3 mt-5 cursor-pointer">
         <input
           type="checkbox"
-          className="w-4 h-4 mt-1 rounded border-gray-600 text-[#00d4ff]"
+          checked={formData.marketingConsent}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              marketingConsent: e.target.checked,
+            })
+          }
+          className="w-4 h-4 mt-1 rounded border-gray-600 text-[#00d4ff] focus:ring-[#00d4ff]"
         />
 
         <span className="text-xs text-gray-400 leading-6">
@@ -778,7 +786,7 @@ export default function Home() {
         disabled={!formData.consent || submitting}
         className="flex-1 bg-[#00d4ff] text-[#0a0f1a] py-3 rounded-lg font-semibold text-sm hover:bg-[#00b8e6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {submitting ? "Submitting..." : "Submit"}
+        {submitting ? "Submitting..." : "Submit & Get Contacted"}
       </button>
     </div>
   </div>
@@ -826,7 +834,15 @@ export default function Home() {
       <footer className="py-8 border-t border-gray-800">
         <div className="container mx-auto px-4 sm:px-6 max-w-full">
           <p className="text-center text-xs text-gray-400">
-            © {new Date().getFullYear()} Lead Stream Hub. All rights reserved.
+            © {new Date().getFullYear()} LeadStream Hub LLC. All rights reserved.{" "}
+            •{" "}
+            <a href="/privacy-policy" className="underline hover:text-white">
+              Privacy Policy
+            </a>{" "}
+            •{" "}
+            <a href="/sms-terms" className="underline hover:text-white">
+              SMS Terms
+            </a>
           </p>
         </div>
       </footer>
