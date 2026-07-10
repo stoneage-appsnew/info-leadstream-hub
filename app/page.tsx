@@ -793,6 +793,9 @@ export default function Home() {
 )}
 
             </form>
+          </div>
+        </div>
+      </div>
 
       {/* Reviews Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 py-16 max-w-full">
