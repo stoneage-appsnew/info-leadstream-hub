@@ -792,6 +792,8 @@ export default function Home() {
   </div>
 )}
 
+            </form>
+
       {/* Reviews Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 py-16 max-w-full">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center mb-12 break-words">
