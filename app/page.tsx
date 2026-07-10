@@ -332,98 +332,131 @@ export default function Home() {
                 </div>
               )}
 
-              {/* Step 3: Contact Info */}
-              {currentStep === 3 && (
-                <div className="space-y-4">
-                  <h2 className="text-xl font-bold text-center mb-4">
-                    Contact Information
-                  </h2>
-                  <div className="space-y-3">
-                    <div>
-                      <label className="block text-xs font-medium mb-1.5">
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.firstName}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            firstName: e.target.value,
-                          })
-                        }
-                        className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium mb-1.5">
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.lastName}
-                        onChange={(e) =>
-                          setFormData({ ...formData, lastName: e.target.value })
-                        }
-                        className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium mb-1.5">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium mb-1.5">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({ ...formData, phone: e.target.value })
-                        }
-                        className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="flex gap-3 mt-6">
-                    <button
-                      type="button"
-                      onClick={handleBack}
-                      className="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold text-sm hover:bg-gray-600 transition-colors"
-                    >
-                      Back
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleNext}
-                      disabled={
-                        !formData.firstName ||
-                        !formData.lastName ||
-                        !formData.email ||
-                        !formData.phone
-                      }
-                      className="flex-1 bg-[#00d4ff] text-[#0a0f1a] py-3 rounded-lg font-semibold text-sm hover:bg-[#00b8e6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Next
-                    </button>
-                  </div>
-                </div>
-              )}
+             {/* Step 3: Contact Info */}
+{currentStep === 3 && (
+  <div className="space-y-4">
+    <h2 className="text-xl font-bold text-center mb-4">
+      Contact Information
+    </h2>
 
+    <div className="space-y-3">
+
+      {/* First Name */}
+      <div>
+        <label className="block text-xs font-medium mb-1.5">
+          First Name
+        </label>
+
+        <input
+          type="text"
+          value={formData.firstName}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              firstName: e.target.value,
+            })
+          }
+          className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
+          required
+        />
+      </div>
+
+      {/* Last Name */}
+      <div>
+        <label className="block text-xs font-medium mb-1.5">
+          Last Name
+        </label>
+
+        <input
+          type="text"
+          value={formData.lastName}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              lastName: e.target.value,
+            })
+          }
+          className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
+          required
+        />
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-xs font-medium mb-1.5">
+          Email Address
+        </label>
+
+        <input
+          type="email"
+          value={formData.email}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              email: e.target.value,
+            })
+          }
+          className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
+          required
+        />
+      </div>
+
+      {/* Phone */}
+      <div>
+        <label className="block text-xs font-medium mb-1.5">
+          Mobile Phone Number
+        </label>
+
+        <input
+          type="tel"
+          value={formData.phone}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              phone: e.target.value,
+            })
+          }
+          className="w-full px-3 py-2 text-sm bg-[#0a0f1a] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#00d4ff] focus:border-transparent outline-none text-white"
+          required
+        />
+
+        <p className="mt-2 text-[11px] text-gray-400 leading-5">
+          By providing your mobile phone number, you consent to receive SMS
+          messages from <strong>LeadStream Hub LLC</strong> regarding your
+          inquiry, appointment reminders, customer support, account updates,
+          and occasional promotional offers. Message frequency varies.
+          Message and data rates may apply. Reply <strong>STOP</strong> to
+          unsubscribe or <strong>HELP</strong> for assistance.
+        </p>
+      </div>
+
+    </div>
+
+    <div className="flex gap-3 mt-6">
+      <button
+        type="button"
+        onClick={handleBack}
+        className="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold text-sm hover:bg-gray-600 transition-colors"
+      >
+        Back
+      </button>
+
+      <button
+        type="button"
+        onClick={handleNext}
+        disabled={
+          !formData.firstName ||
+          !formData.lastName ||
+          !formData.email ||
+          !formData.phone
+        }
+        className="flex-1 bg-[#00d4ff] text-[#0a0f1a] py-3 rounded-lg font-semibold text-sm hover:bg-[#00b8e6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+)}
               {/* Step 4: Lead Qualifications */}
               {currentStep === 4 && (
                 <div className="space-y-4 text-left">
@@ -598,85 +631,158 @@ export default function Home() {
               )}
 
               {/* Step 5: Consent */}
-              {currentStep === 5 && (
-                <div className="space-y-4 text-left">
-                  <h2 className="text-xl font-bold text-center mb-4">
-                    Review & Consent
-                  </h2>
-                  <div className="bg-[#0a0f1a] p-4 rounded-lg space-y-3 border border-gray-800">
-                    <div>
-                      <p className="text-xs text-gray-400 mb-1">Markets:</p>
-                      <p className="text-sm text-white">
-                        {formData.markets.join(", ")}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-400 mb-1">Agent Type:</p>
-                      <p className="text-sm text-white">
-                        {formData.agentType}
-                        {formData.agencySize && ` (${formData.agencySize})`}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-400 mb-1">Contact:</p>
-                      <p className="text-sm text-white">
-                        {formData.firstName} {formData.lastName}
-                      </p>
-                      <p className="text-sm text-white">{formData.email}</p>
-                      <p className="text-sm text-white">{formData.phone}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-400 mb-1">Preferences & Budget:</p>
-                      <p className="text-sm text-white">Start: {formData.howSoon}</p>
-                      <p className="text-sm text-white">Budget: {formData.monthlyBudget}</p>
-                      <p className="text-sm text-white">
-                        Contact: {formData.contactMethod}
-                        {formData.contactMethod === "Schedule a Call" && formData.bestTime && ` (${formData.bestTime})`}
-                      </p>
-                    </div>
-                  </div>
+{currentStep === 5 && (
+  <div className="space-y-4 text-left">
+    <h2 className="text-xl font-bold text-center mb-4">
+      Review & Consent
+    </h2>
 
-                  <label className="flex items-start space-x-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={formData.consent}
-                      onChange={(e) =>
-                        setFormData({ ...formData, consent: e.target.checked })
-                      }
-                      className="w-4 h-4 mt-0.5 rounded border-gray-600 text-[#00d4ff] focus:ring-[#00d4ff] focus:ring-offset-[#0f172a]"
-                      required
-                    />
-                    <span className="text-xs text-gray-300 leading-relaxed">
-                      By clicking Submit, I agree to the Privacy Policy and
-                      Terms of Service, and consent to receive communications
-                      from LeadStream Hub LLC via calls, texts, emails, or
-                      automated messages. Consent is not a condition of
-                      purchase.
-                    </span>
-                  </label>
-
-                  <div className="flex gap-3 mt-6">
-                    <button
-                      type="button"
-                      onClick={handleBack}
-                      className="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold text-sm hover:bg-gray-600 transition-colors"
-                    >
-                      Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!formData.consent || submitting}
-                      className="flex-1 bg-[#00d4ff] text-[#0a0f1a] py-3 rounded-lg font-semibold text-sm hover:bg-[#00b8e6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {submitting ? "Submitting..." : "Submit & Get Contacted"}
-                    </button>
-                  </div>
-                </div>
-              )}
-            </form>
-          </div>
-        </div>
+    <div className="bg-[#0a0f1a] p-4 rounded-lg space-y-3 border border-gray-800">
+      <div>
+        <p className="text-xs text-gray-400 mb-1">Markets:</p>
+        <p className="text-sm text-white">
+          {formData.markets.join(", ")}
+        </p>
       </div>
+
+      <div>
+        <p className="text-xs text-gray-400 mb-1">Agent Type:</p>
+        <p className="text-sm text-white">
+          {formData.agentType}
+          {formData.agencySize && ` (${formData.agencySize})`}
+        </p>
+      </div>
+
+      <div>
+        <p className="text-xs text-gray-400 mb-1">Contact:</p>
+        <p className="text-sm text-white">
+          {formData.firstName} {formData.lastName}
+        </p>
+        <p className="text-sm text-white">{formData.email}</p>
+        <p className="text-sm text-white">{formData.phone}</p>
+      </div>
+
+      <div>
+        <p className="text-xs text-gray-400 mb-1">
+          Preferences & Budget:
+        </p>
+        <p className="text-sm text-white">
+          Start: {formData.howSoon}
+        </p>
+        <p className="text-sm text-white">
+          Budget: {formData.monthlyBudget}
+        </p>
+        <p className="text-sm text-white">
+          Contact: {formData.contactMethod}
+          {formData.contactMethod === "Schedule a Call" &&
+            formData.bestTime &&
+            ` (${formData.bestTime})`}
+        </p>
+      </div>
+    </div>
+
+    <div className="bg-[#0a0f1a] border border-[#00d4ff]/30 rounded-lg p-4">
+
+      <p className="text-sm font-semibold text-white mb-4">
+        LeadStream Hub LLC SMS Consent
+      </p>
+
+      {/* Required Consent */}
+      <label className="flex items-start space-x-3 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={formData.consent}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              consent: e.target.checked,
+            })
+          }
+          className="w-4 h-4 mt-1 rounded border-gray-600 text-[#00d4ff] focus:ring-[#00d4ff]"
+          required
+        />
+
+        <span className="text-xs text-gray-300 leading-6">
+          I agree to receive SMS messages from
+          <strong> LeadStream Hub LLC</strong>
+          regarding insurance leads, customer support,
+          appointment reminders, account updates,
+          and occasional promotional offers.
+
+          <br /><br />
+
+          Message frequency varies.
+
+          <br />
+
+          Message & data rates may apply.
+
+          <br />
+
+          Reply <strong>STOP</strong> to unsubscribe.
+
+          <br />
+
+          Reply <strong>HELP</strong> for assistance.
+
+          <br /><br />
+
+          I have read and agree to the{" "}
+          <a
+            href="/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#00d4ff] underline"
+          >
+            Privacy Policy
+          </a>{" "}
+          and{" "}
+          <a
+            href="/sms-terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#00d4ff] underline"
+          >
+            SMS Terms of Service
+          </a>.
+        </span>
+      </label>
+
+      {/* Optional Marketing Consent */}
+      <label className="flex items-start space-x-3 mt-5 cursor-pointer">
+        <input
+          type="checkbox"
+          className="w-4 h-4 mt-1 rounded border-gray-600 text-[#00d4ff]"
+        />
+
+        <span className="text-xs text-gray-400 leading-6">
+          I also agree to receive promotional SMS messages from
+          LeadStream Hub LLC. This consent is optional and is not
+          required to submit this form.
+        </span>
+      </label>
+
+    </div>
+
+    <div className="flex gap-3 mt-6">
+      <button
+        type="button"
+        onClick={handleBack}
+        className="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold text-sm hover:bg-gray-600 transition-colors"
+      >
+        Back
+      </button>
+
+      <button
+        type="submit"
+        disabled={!formData.consent || submitting}
+        className="flex-1 bg-[#00d4ff] text-[#0a0f1a] py-3 rounded-lg font-semibold text-sm hover:bg-[#00b8e6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {submitting ? "Submitting..." : "Submit"}
+      </button>
+    </div>
+  </div>
+)}
 
       {/* Reviews Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 py-16 max-w-full">
