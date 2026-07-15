@@ -389,13 +389,10 @@ export default function Home() {
           required
         />
         <p className="mt-2 text-[11px] text-gray-400 leading-5">
-  By providing your mobile phone number and submitting this form, you
-  consent to receive informational SMS messages from{" "}
-  <strong>LeadStream Hub LLC</strong> regarding your inquiry,
-  appointment reminders, customer support, and account updates.
-  Message frequency varies. Message and data rates may apply. Reply{" "}
-  <strong>STOP</strong> to unsubscribe or <strong>HELP</strong> for
-  assistance.
+  By providing your mobile phone number, you may optionally opt in to
+  receive SMS communications from{" "}
+  <strong>LeadStream Hub LLC</strong> by selecting your preferred
+  consent options during the final step of this form.
 </p>
       </div>
     </div>
@@ -639,7 +636,10 @@ export default function Home() {
       <p className="text-sm font-semibold text-white mb-4">
         SMS Consent & Authorization
       </p>
-      {/* Required Consent */}
+      <p className="text-xs text-gray-400 mb-4">
+        Selecting either checkbox below is completely optional and is not required to submit this form.
+      </p>
+      {/* Non-Marketing Consent (Optional) */}
       <label className="flex items-start space-x-3 cursor-pointer">
         <input
           type="checkbox"
@@ -651,18 +651,24 @@ export default function Home() {
             })
           }
           className="w-4 h-4 mt-1 rounded border-gray-600 text-[#00d4ff] focus:ring-[#00d4ff]"
-          required
         />
         <span className="text-xs text-gray-300 leading-6">
-          I agree to receive informational SMS messages from
-<strong> LeadStream Hub LLC</strong>
-regarding my inquiry, insurance inquiries,
-customer support, appointment reminders, and
-account updates.
+          I consent to receive non-marketing text messages from{" "}
+<strong>LeadStream Hub LLC</strong> regarding:
 
 <br /><br />
 
-Message frequency varies.
+- Insurance lead inquiry follow-ups
+<br />
+- Customer support communications
+<br />
+- Requested consultation scheduling
+<br />
+- Service-related updates
+
+<br /><br />
+
+Message frequency may vary.
 
 <br />
 
@@ -670,15 +676,20 @@ Message & data rates may apply.
 
 <br />
 
-Reply <strong>STOP</strong> to unsubscribe.
+Text <strong>HELP</strong> for assistance.
 
 <br />
 
-Reply <strong>HELP</strong> for assistance.
+Reply <strong>STOP</strong> to opt out.
 
 <br /><br />
 
-          I have read and agree to the{" "}
+Consent to receive SMS messages is not required as a condition of
+purchasing any product or service.
+
+<br /><br />
+
+          I acknowledge that I have reviewed the{" "}
           <a
             href="/privacy-policy"
             target="_blank"
@@ -712,13 +723,22 @@ Reply <strong>HELP</strong> for assistance.
           className="w-4 h-4 mt-1 rounded border-gray-600 text-[#00d4ff] focus:ring-[#00d4ff]"
         />
         <span className="text-xs text-gray-400 leading-6">
-  I also agree to receive promotional SMS messages from
-  LeadStream Hub LLC about new services, special offers,
-  and company updates.
+  I consent to receive marketing text messages from{" "}
+  <strong>LeadStream Hub LLC</strong> regarding:
 
   <br /><br />
 
-  Message frequency varies.
+  - Promotional announcements
+  <br />
+  - Special offers
+  <br />
+  - New services
+  <br />
+  - Company updates
+
+  <br /><br />
+
+  Message frequency may vary.
 
   <br />
 
@@ -726,16 +746,30 @@ Reply <strong>HELP</strong> for assistance.
 
   <br />
 
-  Reply <strong>STOP</strong> to unsubscribe.
+  Text <strong>HELP</strong> for assistance.
 
   <br />
 
-  Reply <strong>HELP</strong> for assistance.
+  Reply <strong>STOP</strong> to opt out.
 
   <br /><br />
 
-  This consent is optional and is not required to submit
-  this form.
+  This consent is optional and is not required to submit this form.
+
+  <br /><br />
+
+  Marketing SMS messages are sent only to individuals who separately
+  opt in.
+
+  <br /><br />
+
+  Marketing SMS communications may include promotional announcements,
+  special offers, new services, and company updates.
+
+  <br /><br />
+
+  Consent to receive marketing SMS messages is not required to
+  purchase any products or services.
 </span>
       </label>
     </div>
@@ -749,7 +783,7 @@ Reply <strong>HELP</strong> for assistance.
       </button>
       <button
         type="submit"
-        disabled={!formData.consent || submitting}
+        disabled={submitting}
         className="flex-1 bg-[#00d4ff] text-[#0a0f1a] py-3 rounded-lg font-semibold text-sm hover:bg-[#00b8e6] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {submitting ? "Submitting..." : "Submit & Get Contacted"}
