@@ -700,7 +700,7 @@ href="https://leadstreamhub.com/privacy-policy"
           </a>{" "}
           and{" "}
           <a
-            href="/sms-terms"
+            href="https://leadstreamhub.com/terms-of-service/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#00d4ff] underline"
