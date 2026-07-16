@@ -691,7 +691,7 @@ purchasing any product or service.
 
           I acknowledge that I have reviewed the{" "}
           <a
-            href="/privacy-policy"
+href="https://leadstreamhub.com/privacy-policy"
             target="https://leadstreamhub.com/privacy-policy/"
             rel="noopener noreferrer"
             className="text-[#00d4ff] underline"
