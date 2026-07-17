@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
       email,
       phone,
       consent,
+      marketingConsent,
       howSoon,
       monthlyBudget,
       contactMethod,
@@ -36,7 +37,6 @@ export async function POST(request: NextRequest) {
       !lastName ||
       !email ||
       !phone ||
-      !consent ||
       !howSoon ||
       !monthlyBudget ||
       !contactMethod ||
@@ -57,7 +57,8 @@ export async function POST(request: NextRequest) {
       lastName,
       email,
       phone,
-      consent,
+      consent: !!consent,
+      marketingConsent: !!marketingConsent,
       howSoon,
       monthlyBudget,
       contactMethod,
@@ -125,8 +126,12 @@ export async function POST(request: NextRequest) {
                   </tr>
                   ` : ""}
                   <tr style="background-color: #f9f9f9;">
-                    <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Consent Granted</td>
+                    <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Non-Marketing SMS Consent</td>
                     <td style="padding: 8px; border: 1px solid #ddd;">${consent ? "Yes" : "No"}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Marketing SMS Consent</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">${marketingConsent ? "Yes" : "No"}</td>
                   </tr>
                 </tbody>
               </table>
